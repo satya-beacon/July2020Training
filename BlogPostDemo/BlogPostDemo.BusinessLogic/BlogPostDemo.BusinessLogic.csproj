@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BlogPostDemo.DataAccess\BlogPostDemo.DataAccess.csproj" />
+    <ProjectReference Include="..\BlogPostDemo.Entity\BlogPostDemo.Entity.csproj" />
+  </ItemGroup>
+
+</Project>

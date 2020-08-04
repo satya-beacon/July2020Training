@@ -1,0 +1,19 @@
+﻿CREATE DATABASE PracticeDb
+
+Use PracticeDb
+
+CREATE TABLE Blog(
+Id int identity primary key,
+Title NVARCHAR(100),
+Author NVARCHAR(100),
+DateCreated DateTime2)
+
+
+
+CREATE TABLE Post(
+Id int identity primary key,
+Title NVARCHar(100),
+Dsc nvarchar(max),
+author nvarchar(100),
+DateCreated DAtetime2,
+BlogId int foreign key references Blog(Id))

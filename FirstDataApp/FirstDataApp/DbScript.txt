@@ -1,0 +1,17 @@
+﻿CREATE DATABASE PracticeDb
+GO
+Use PracticeDb
+GO
+
+CREATE table Employee(
+EmployeeId INT Identity Primary key,
+EmployeeName NVARCHAR(100),
+JobTitle NVARCHAR(100),
+BaseSalary decimal)
+GO
+
+INSERT INTO Employee VALUES('Satya', 'Trainer', 1000)
+INSERT INTO Employee VALUES('John', 'Recruiter', 500)
+
+SELECT * FROM Employee
+GO
