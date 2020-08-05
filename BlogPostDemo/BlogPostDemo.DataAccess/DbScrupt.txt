@@ -17,3 +17,71 @@ Dsc nvarchar(max),
 author nvarchar(100),
 DateCreated DAtetime2,
 BlogId int foreign key references Blog(Id))
+
+
+CREATE PROC spc_AddPost
+@Title NVARCHAR(100),
+@Author NVARCHAR(100),
+@Dsc NVARCHar(MAX),
+@BlogId INT,
+@PostId INT OUTPUT
+as
+BEGIN
+	INSERT INTO POST (Title, author, Dsc, DateCreated, BlogId)
+			VALUES(@Title, @Author, @Dsc, GETDATE(), @BlogId)
+	SET @PostId = SCOPE_IDENTITY()
+END
+
+
+
+
+CReate PROC [dbo].[spr_getPostById]
+@id int
+as 
+BEGIN
+	SELECT p.Id, p.Title, p.author , p.Dsc, p.DateCreated , b.Id as [BlogId], b.Title as [BlogTitle], b.Author as [BlogAuthor], b.DateCreated as [BlogCreatedDate] from Post p
+	INNER JOIN Blog b on p.BlogId = b.Id
+	WHERE p.Id = @id
+END
+
+
+
+
+
+CREATE TABLE Customer(
+Id INT IDENTITY PRIMARY KEY,
+Name NVARCHAR(100),
+Email NVARCHAR(100),
+AccountBalance decimal)
+
+SELECT * FROM Customer
+
+
+ALTER PROC spu_transferBalance
+@FromAccount INT,
+@ToAccount INT,
+@Amount decimal
+as
+BEGIN TRY
+	DECLARE @DebitRecords  INT
+	DECLARE @CreditRecords INT
+
+	BEGIN TRANSACTION tr_transfer
+
+	UPDATE Customer SET AccountBalance = AccountBalance - @Amount WHERE ID = @FromAccount
+	SET @DebitRecords = @@ROWCOUNT
+
+
+	UPDATE Customer SET AccountBAlance = AccountBalance + @Amount WHERE Id = @ToAccount
+	SET @CreditRecords = @@ROWCOUNT
+
+	IF @DebitRecords = @CreditRecords
+		COMMIT TRANSACTION tr_transfer
+	ELSE
+		ROLLBACK TRANSACTION tr_transfer
+END TRY
+BEGIN CATCH
+	ROLLBACK
+END CATCH
+
+spu_transferBalance 1, 2, 100

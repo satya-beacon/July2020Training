@@ -1,10 +1,12 @@
-﻿using System;
+﻿using BlogPostDemo.Entity;
 using System.Collections.Generic;
-using System.Text;
 
 namespace BlogPostDemo.BusinessLogic
 {
-    public class IPostDomain
+    public interface IPostDomain
     {
+        int AddPost(Post post);
+        Post GetPostById(int id);
+        List<Post> GetAllPosts();
     }
 }

@@ -11,6 +11,14 @@ namespace BlogPostDemo.Entity
         public string Dsc { get; set; }
         public DateTime DateCreated { get; set; }
 
+        /// <summary>
+        /// foreign key
+        /// </summary>
         public int BlogId { get; set; }
+
+        /// <summary>
+        /// parent table
+        /// </summary>
+        public Blog Blog { get; set; }
     }
 }

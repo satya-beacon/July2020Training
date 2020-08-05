@@ -29,20 +29,14 @@ namespace BlogPostDemo.DataAccess
         #region private methods
         private void EnsureOpenConnection()
         {
-            if(connection == null)
-            {
                 connection = new SqlConnection();
                 connection.ConnectionString = this.CONNECTIONSTRING;
                 connection.Open();
-            }
         }
 
         private void EnsureCloseConnection()
         {
-            if(connection != null)
-            {
-                connection.Close();
-            }
+            connection.Close();
         }
         #endregion
 
@@ -70,9 +64,42 @@ namespace BlogPostDemo.DataAccess
             }
         }
 
-        public void AddPost(Post post)
+        public int AddPost(Post post)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                EnsureOpenConnection();
+
+                SqlCommand command = new SqlCommand();
+                command.Connection = connection;
+                command.CommandType = CommandType.StoredProcedure;
+                command.CommandText = "[dbo].[spc_AddPost]";
+
+                SqlParameter postTitle = new SqlParameter("@Title", SqlDbType.NVarChar, 100);
+                postTitle.Value = post.Title;
+                command.Parameters.Add(postTitle);
+                
+                command.Parameters.AddWithValue("@Author", post.Author);
+                command.Parameters.AddWithValue("@Dsc", post.Dsc);
+                command.Parameters.AddWithValue("@BlogId", post.BlogId);
+
+                SqlParameter insertedPostId = new SqlParameter("@PostId", SqlDbType.Int);
+                insertedPostId.Direction = ParameterDirection.Output;
+                command.Parameters.Add(insertedPostId);
+
+                command.ExecuteNonQuery();
+                post.Id = Convert.ToInt32( insertedPostId.Value);
+
+                command.Dispose();
+                EnsureCloseConnection();
+
+            }
+            catch(Exception ex)
+            {
+                //log the exceptions 
+            }
+
+            return post.Id;
         }
 
         public List<Blog> GetAllBlogs()
@@ -82,7 +109,34 @@ namespace BlogPostDemo.DataAccess
 
         public List<Post> GetAllPosts()
         {
-            throw new System.NotImplementedException();
+            SqlConnection sqlConnection = new SqlConnection();
+            sqlConnection.ConnectionString = this.CONNECTIONSTRING;
+
+           
+
+            SqlDataAdapter adapter = new SqlDataAdapter("SELECT * FROM POST", sqlConnection);
+            
+
+            DataSet postDataSet = new DataSet();
+            adapter.Fill(postDataSet, "post");
+
+            DataTable table = postDataSet.Tables["post"];
+            List<Post> allPosts = new List<Post>();
+            foreach(DataRow row in table.Rows)
+            {
+                allPosts.Add(new Post() 
+                {
+                    Id = Convert.ToInt32(row["Id"]),
+                    Title = row["Title"].ToString(),
+                    Author = row["Author"].ToString(),
+                    Dsc = row["Dsc"].ToString(),
+                    DateCreated = Convert.ToDateTime(row["DateCreated"]),
+                    BlogId = Convert.ToInt32(row["BlogId"])
+
+                });
+            }
+
+            return allPosts;
         }
 
         public Blog GetBlogById(int id)
@@ -120,7 +174,45 @@ namespace BlogPostDemo.DataAccess
 
         public Post GetPostById(int id)
         {
-            throw new System.NotImplementedException();
+            Post returnPost = null;
+
+            try
+            {
+                EnsureOpenConnection();
+
+                SqlCommand command = new SqlCommand();
+                command.Connection = connection;
+                command.CommandType = CommandType.StoredProcedure;
+                command.CommandText = "[dbo].[spr_getPostById]";
+
+                command.Parameters.AddWithValue("@id", id);
+
+
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    returnPost = new Post();
+                    returnPost.Id = Convert.ToInt32( reader["Id"]);
+                    returnPost.Title = Convert.ToString(reader["Title"]);
+                    returnPost.Author = Convert.ToString(reader["Author"]);
+                    returnPost.Dsc = Convert.ToString(reader["Dsc"]);
+                    returnPost.DateCreated = Convert.ToDateTime(reader["DateCreated"]);
+
+                    returnPost.Blog = new Blog();
+                    returnPost.Blog.Id = Convert.ToInt32(reader["BlogId"]);
+                    returnPost.Blog.Title = Convert.ToString(reader["BlogTitle"]);
+                    returnPost.Blog.Author = Convert.ToString(reader["BlogAuthor"]);
+                    returnPost.Blog.DateCreated = Convert.ToDateTime(reader["BlogCreatedDate"]);
+                }
+                reader.Dispose();
+                EnsureCloseConnection();
+            }
+            catch(Exception ex)
+            {
+
+            }
+
+            return returnPost;
         }
 
         public void Remove(int id)
@@ -141,6 +233,31 @@ namespace BlogPostDemo.DataAccess
         public void UpdatePost(Post post)
         {
             throw new System.NotImplementedException();
+        }
+
+        public void TransferAccountBalance(int fromAccount, int toAccount, decimal amount)
+        {
+            try
+            {
+                EnsureOpenConnection();
+                SqlCommand command = new SqlCommand();
+                command.Connection = connection;
+                command.CommandType = CommandType.StoredProcedure;
+                command.CommandText = "spu_transferBalance";
+
+                command.Parameters.AddWithValue("@FromAccount", fromAccount);
+                command.Parameters.AddWithValue("@ToAccount", toAccount);
+                command.Parameters.AddWithValue("@Amount", amount);
+
+                command.ExecuteNonQuery();
+
+                EnsureCloseConnection();
+
+            }
+            catch(Exception ex)
+            {
+
+            }
         }
         #endregion
     }

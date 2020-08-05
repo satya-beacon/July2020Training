@@ -12,11 +12,14 @@ namespace BlogPostDemo.DataAccess
         List<Blog> GetAllBlogs();
 
 
-        public void AddPost(Post post);
+        public int AddPost(Post post);
         public void UpdatePost(Post post);
         public void Remove(int id);
         Post GetPostById(int id);
         List<Post> GetAllPosts();
+
+
+        void TransferAccountBalance(int fromAccount, int toAccount, decimal amount);
 
     }
 }
