@@ -1,5 +1,6 @@
-﻿using BlogPostDemo.DataAccess;
+﻿using BlogPostDemo.EFDataAccess;
 using BlogPostDemo.Entity;
+using BlostPostDemo.EFDataAccess;
 using System.Collections.Generic;
 
 namespace BlogPostDemo.BusinessLogic

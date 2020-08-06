@@ -1,7 +1,8 @@
 ﻿using BlogPostDemo.Entity;
 using System;
 using System.Collections.Generic;
-using BlogPostDemo.DataAccess;
+using BlostPostDemo.EFDataAccess;
+using BlogPostDemo.EFDataAccess;
 
 namespace BlogPostDemo.BusinessLogic
 {

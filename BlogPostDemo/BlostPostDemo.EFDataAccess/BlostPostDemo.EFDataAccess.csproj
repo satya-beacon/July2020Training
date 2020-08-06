@@ -5,8 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.6" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\BlogPostDemo.Entity\BlogPostDemo.Entity.csproj" />
-    <ProjectReference Include="..\BlostPostDemo.EFDataAccess\BlostPostDemo.EFDataAccess.csproj" />
   </ItemGroup>
 
 </Project>

@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace BlogPostDemo.Entity
+namespace EFCoreDemo
 {
     public class Blog
     {
