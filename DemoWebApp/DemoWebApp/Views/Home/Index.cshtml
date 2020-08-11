@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model List<Blog>
+<div>
+    <h2>@ViewData["CurrentDate"]</h2>
+</div>
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Date Created</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @for(var i = 0; i< Model.Count; i++){
+            <tr>
+                <td>@Model[i].Id</td>
+                <td>@Model[i].Title</td>
+                <td>@Model[i].Author</td>
+                <td>@Model[i].DateCreated</td>
+            </tr>  
+            })
+        </tbody>
+    </table>
+</div>
