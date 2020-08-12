@@ -1,0 +1,29 @@
+﻿<!doctype html>
+<html>
+ <head>
+     <title>Usermanagement App</title>
+ </head>
+<body>
+    <header>
+        <h1>Usermanagement Application</h1>
+        <br />
+        <div>
+            <a href="~/Home/Index">Home</a> &nbsp;&nbsp;
+            <a href="~/Account/Login">Login</a>&nbsp; &nbsp;
+            <a href="~/Account/Signup">Signup</a>&nbsp; &nbsp;
+            <a href="~/Account/ProfileView">My Profile</a>&nbsp;&nbsp;
+            <a href="~/Account/Signout">Logout</a>
+
+        </div>
+    </header>
+    <div>
+        <main>
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer>
+        <span>&copy; Username Management app - 2020</span>
+    </footer>
+</body>
+</html>
