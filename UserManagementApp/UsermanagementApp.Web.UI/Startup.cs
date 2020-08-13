@@ -33,6 +33,7 @@ namespace UsermanagementApp.Web.UI
             });
 
             services.AddControllersWithViews();
+            services.AddHttpContextAccessor();
 
            
         }

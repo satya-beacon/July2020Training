@@ -1,18 +1,30 @@
-﻿<!doctype html>
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+
+<!doctype html>
 <html>
- <head>
-     <title>Usermanagement App</title>
- </head>
+<head>
+    <title>Usermanagement App</title>
+</head>
 <body>
     <header>
         <h1>Usermanagement Application</h1>
+        
         <br />
         <div>
             <a href="~/Home/Index">Home</a> &nbsp;&nbsp;
-            <a href="~/Account/Login">Login</a>&nbsp; &nbsp;
-            <a href="~/Account/Signup">Signup</a>&nbsp; &nbsp;
-            <a href="~/Account/ProfileView">My Profile</a>&nbsp;&nbsp;
-            <a href="~/Account/Signout">Logout</a>
+            @if (HttpContextAccessor.HttpContext.Session.GetString("userToken") == null)
+            {
+                <a href="~/Account/Login">Login</a>
+                <a href="~/Account/Signup">Signup</a>
+            }
+            else
+            {
+                <a href="~/Account/ProfileView">My Profile</a>
+                <a href="~/Account/Signout">Logout</a>
+            }
+
+
 
         </div>
     </header>
