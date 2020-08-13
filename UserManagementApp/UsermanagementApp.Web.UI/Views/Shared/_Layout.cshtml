@@ -3,39 +3,56 @@
 
 <!doctype html>
 <html>
-<head>
-    <title>Usermanagement App</title>
-</head>
-<body>
-    <header>
-        <h1>Usermanagement Application</h1>
-        
-        <br />
-        <div>
-            <a href="~/Home/Index">Home</a> &nbsp;&nbsp;
-            @if (HttpContextAccessor.HttpContext.Session.GetString("userToken") == null)
-            {
-                <a href="~/Account/Login">Login</a>
-                <a href="~/Account/Signup">Signup</a>
-            }
-            else
-            {
-                <a href="~/Account/ProfileView">My Profile</a>
-                <a href="~/Account/Signout">Logout</a>
-            }
+    <head>
+        <title>Usermanagement App - @ViewData["Title"]</title>
+        <link rel="stylesheet" href="~/styles/site.css"/>
+        <link rel="stylesheet" href="~/bootstrap/bootstrap.min.css" />
+    </head>
+    <body>
+        <header class="container-fluid" id="topHeader">
+            <div class="row">
+                <div class="col-2">
+                    <a href="~/Home/Index" title="Logo" target="_self" id="lnkLogo">
+                        <img id="imgLogo" src="~/images/beacon-logo.png" alt="Beaconfire solution" />
+                    </a>
+                </div>
+                <div class="col-10">
+                    <h1 id="headTitle">Usermanagement Application</h1>
+                </div>
+            </div>
+           
 
+            <br />
+            <nav id="topNav">
+                <ul class="nav nav-pills nav-fill">
+                    <li class="nav-item">
+                        <a href="~/Home/Index" class="nav-link">Home</a>
+                    </li>
+                    @if (HttpContextAccessor.HttpContext.Session.GetString("userToken") == null)
+                    {
+                        <li class="nav-item"><a class="nav-link" href="~/Account/Login" title="Login" target="_self">Login</a></li>
+                        <li class="nav-item"><a class="nav-link" href="~/Account/Signup" title="Signup" target="_blank">Signup</a></li>
 
-
-        </div>
-    </header>
-    <div>
-        <main>
+                    }
+                    else
+                    {
+                        <li class="nav-item"><a class="nav-link" href="~/Account/ProfileView">My Profile</a></li>
+                        <li class="nav-item"><a class="nav-link" href="~/Account/ViewAll">View All Users</a></li>
+                        <li class="nav-item"><a class="nav-link" href="~/Account/Signout">Logout</a></li>
+                    }
+                </ul>
+               
+               
+            </nav>
+        </header>
+        <main class="container-fluid">
             @RenderBody()
         </main>
-    </div>
 
-    <footer>
-        <span>&copy; Username Management app - 2020</span>
-    </footer>
-</body>
+        <footer class="footer mt-auto py-3">
+            <div class="container">
+                <span class="text-muted">Username Management app - 2020. <a href="https://www.beaconfiresolution.com" title="Beaconfire Soltuion" target="_blank">Beaconfire Solution</a></a></span>
+            </div>
+        </footer>
+    </body>
 </html>

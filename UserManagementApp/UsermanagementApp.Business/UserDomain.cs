@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UsermanagementApp.Contracts;
 using UsermanagementApp.DataAccess;
 using UsermanagementApp.Entity;
@@ -19,9 +20,19 @@ namespace UsermanagementApp.Business
             this.repository.CreateUserProfile(userProfile);
         }
 
+        public List<UserProfile> GetAllUsers()
+        {
+            return this.repository.GetAllUsers();
+        }
+
         public UserProfile GetUserprofile(string username)
         {
             return this.repository.GetUserprofile(username);
+        }
+
+        public UserProfile GetUserprofile(int id)
+        {
+            return this.repository.GetUserprofile(id);
         }
 
         public bool ValidateUser(LoginViewModel loginViewModel)

@@ -1,28 +1,25 @@
-﻿<style>
-    .alert-danger {
-        color:red;
-    }
-</style>
-<form id="frmLogin" name="frmLogin" method="post">
-    <h3>Please Login here.</h3>
-    <div>
-        <label for="txtUsername">Username: </label>
-        <input type="text" name="Username" id="txtUsername" />
-    </div>
-
-    <div>
-        <label for="txtPassword">Password: </label>
-        <input type="password" name="Password" id="txtPassword" />
-    </div>
-    @if (ViewData["UnAuthorizedMessage"] != null)
-    {
-        <div>
-            <h4 class="alert-danger">@ViewData["UnAuthorizedMessage"]</h4>
+﻿<div class="container">
+    <form id="frmLogin" name="frmLogin" method="post">
+        <h3>Please Login here.</h3>
+        <div class="form-group row">
+            <label for="txtUsername">Username: </label>
+            <input type="text" name="Username" id="txtUsername" class="form-control" />
         </div>
-    }
 
-    <div>
-        <button type="reset">Cancel</button> &nbsp;&nbsp;
-        <button type="submit">Login</button>
-    </div>
-</form>
+        <div class="form-group row">
+            <label for="txtPassword">Password: </label>
+            <input type="password" name="Password" id="txtPassword" class="form-control" />
+        </div>
+        @if (ViewData["UnAuthorizedMessage"] != null)
+        {
+            <div>
+                <h4 class="alert-danger">@ViewData["UnAuthorizedMessage"]</h4>
+            </div>
+        }
+
+        <div>
+            <button type="reset" class="btn btn-warning">Cancel</button> &nbsp;&nbsp;
+            <button type="submit" class="btn btn-success">Login</button>
+        </div>
+    </form>
+</div>

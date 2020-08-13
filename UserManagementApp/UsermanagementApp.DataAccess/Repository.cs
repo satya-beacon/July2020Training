@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UsermanagementApp.Contracts;
 using UsermanagementApp.Entity;
@@ -22,9 +23,19 @@ namespace UsermanagementApp.DataAccess
             this.context.SaveChanges();
         }
 
+        public List<UserProfile> GetAllUsers()
+        {
+            return this.context.Userprofiles.ToList();
+        }
+
         public UserProfile GetUserprofile(string username)
         {
             return this.context.Userprofiles.FirstOrDefault(up => up.Username == username);
+        }
+
+        public UserProfile GetUserprofile(int id)
+        {
+            return this.context.Userprofiles.FirstOrDefault(up => up.Id == id);
         }
 
         public bool ValidateUser(LoginViewModel loginViewModel)

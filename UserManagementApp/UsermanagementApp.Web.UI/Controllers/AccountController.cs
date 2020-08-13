@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Session;
+using System.Collections.Generic;
+using System.Linq;
 using UsermanagementApp.Business;
 using UsermanagementApp.Contracts;
 using UsermanagementApp.Entity;
@@ -18,6 +20,7 @@ namespace UsermanagementApp.Web.UI.Controllers
         }
         public IActionResult Login()
         {
+            ViewData["Title"] = "Login";
             return View();
         }
 
@@ -40,6 +43,7 @@ namespace UsermanagementApp.Web.UI.Controllers
 
         public IActionResult Signup()
         {
+            ViewData["Title"] = "Signup";
             return View();
         }
 
@@ -52,6 +56,7 @@ namespace UsermanagementApp.Web.UI.Controllers
 
         public IActionResult Welcome()
         {
+            ViewData["Title"] = "Welcome";
             var loggedUsername = HttpContext.Session.GetString("userToken");
             UserProfile userProfile = null;
             if (!string.IsNullOrEmpty(loggedUsername))
@@ -65,18 +70,30 @@ namespace UsermanagementApp.Web.UI.Controllers
             return View(userProfile);
         }
 
-        public IActionResult ProfileView()
+        public IActionResult ProfileView(int? id)
         {
+            ViewData["Title"] = "My Profile";
             var loggedUsername = HttpContext.Session.GetString("userToken");
+           
             UserProfile userProfile = null;
-            if (!string.IsNullOrEmpty(loggedUsername))
+            
+            if(id != null && id > 0)
             {
-                userProfile = this.userDomain.GetUserprofile(loggedUsername);
+                userProfile = this.userDomain.GetUserprofile(id.Value);
             }
             else
             {
-                return BadRequest("Bad Request");
+                if (!string.IsNullOrEmpty(loggedUsername))
+                {
+                    userProfile = this.userDomain.GetUserprofile(loggedUsername);
+                }
+                else
+                {
+                    return BadRequest("Bad Request");
+                }
             }
+
+            
             return View(userProfile);
         }
 
@@ -84,6 +101,15 @@ namespace UsermanagementApp.Web.UI.Controllers
         {
             HttpContext.Session.Clear();
             return RedirectToAction("Login");
+        }
+        public IActionResult ViewAll(string searchString)
+        {
+            var allUsers = this.userDomain.GetAllUsers();
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                allUsers = allUsers.Where(up => up.LastName.Contains(searchString)).ToList();
+            }
+            return View(allUsers);
         }
     }
 }
