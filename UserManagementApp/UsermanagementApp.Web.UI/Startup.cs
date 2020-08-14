@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using UsermanagementApp.Contracts;
+using UsermanagementApp.ConsoleLog;
 
 namespace UsermanagementApp.Web.UI
 {
@@ -34,6 +36,10 @@ namespace UsermanagementApp.Web.UI
 
             services.AddControllersWithViews();
             services.AddHttpContextAccessor();
+
+            services.AddSingleton<IRepository, DataAccess.Repository>();
+            services.AddSingleton<IUserDomain, Business.UserDomain>();
+            services.AddSingleton<ILogger, ConsoleLogger>();
 
            
         }

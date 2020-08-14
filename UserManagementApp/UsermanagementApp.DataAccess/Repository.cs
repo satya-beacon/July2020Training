@@ -10,17 +10,29 @@ namespace UsermanagementApp.DataAccess
     public class Repository : IRepository
     {
         private UserDbContext context;
+        private ILogger logger;
 
-        public Repository()
+        public Repository(ILogger logger)
         {
             this.context = new UserDbContext();
+            this.logger = logger;
         }
         public void CreateUserProfile(UserProfile userProfile)
         {
-            userProfile.CreateDt = DateTime.Now;
-            userProfile.CreateBy = "System";
-            this.context.Userprofiles.Add(userProfile);
-            this.context.SaveChanges();
+            try
+            {
+                userProfile.CreateDt = DateTime.Now;
+                userProfile.CreateBy = "System";
+                this.context.Userprofiles.Add(userProfile);
+                this.context.SaveChanges();
+                this.logger.LogInfo("User is creted!");
+            }
+            catch(Exception ex)
+            {
+                this.logger.LogError(ex.Message);
+            }
+            
+          
         }
 
         public List<UserProfile> GetAllUsers()

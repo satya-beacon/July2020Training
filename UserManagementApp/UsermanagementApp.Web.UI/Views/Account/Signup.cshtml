@@ -2,16 +2,16 @@
     <h2>Please Register Account here.</h2>
     <br />
     <div>
-        <label for="txtUsername">Username: </label>
+        <label for="txtUsername">Username: <span class="text-danger">*</span></label>
         <input type="text" name="Username" id="txtUsername" />
     </div>
 
     <div>
-        <label for="txtPassword">Password: </label>
+        <label for="txtPassword">Password: <span class="text-danger">*</span></label>
         <input type="password" name="password" id="txtPassword" />
     </div>
     <div>
-        <label for="txtFirstName">FirstName: </label>
+        <label for="txtFirstName">FirstName: <span class="text-danger">*</span></label>
         <input type="text" name="FirstName" id="txtFirstName" />
 
     </div>
@@ -20,11 +20,19 @@
         <input type="text" name="LastName" id="txtLastName" />
     </div>
     <div>
-        <label for="txtEmail">Email: </label>
+        <label for="txtEmail">Email: <span class="text-danger">*</span></label>
         <input type="text" name="Email" id="txtEmail" />
     </div>
     <div>
         <button type="reset">Cancel</button> &nbsp;&nbsp;
         <button type="submit">Submit</button>
     </div>
+    @if(ViewData["Message"] != null)
+    {
+        <div class="alert">
+            <div class="alert-danger">
+                <span>@ViewData["Message"]</span>
+            </div>
+        </div>
+    }
 </form>

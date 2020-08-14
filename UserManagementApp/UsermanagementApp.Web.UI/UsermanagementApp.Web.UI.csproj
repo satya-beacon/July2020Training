@@ -6,11 +6,16 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\UsermanagementApp.Business\UsermanagementApp.Business.csproj" />
+    <ProjectReference Include="..\UsermanagementApp.BussinessV2\UsermanagementApp.BussinessV2.csproj" />
+    <ProjectReference Include="..\UsermanagementApp.ConsoleLogger\UsermanagementApp.ConsoleLogger.csproj" />
     <ProjectReference Include="..\UsermanagementApp.Contracts\UsermanagementApp.Contracts.csproj" />
+    <ProjectReference Include="..\UsermanagementApp.DataAccessV2\UsermanagementApp.DataAccessV2.csproj" />
+    <ProjectReference Include="..\UsermanagementApp.DataAccess\UsermanagementApp.DataAccess.csproj" />
     <ProjectReference Include="..\UsermanagementApp.Entity\UsermanagementApp.Entity.csproj" />
   </ItemGroup>
 

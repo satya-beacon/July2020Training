@@ -1,4 +1,8 @@
-﻿<div class="container">
+﻿@{
+    Layout = "_Layout";
+}
+
+<div class="container">
     <form id="frmLogin" name="frmLogin" method="post">
         <h3>Please Login here.</h3>
         <div class="form-group row">
@@ -23,3 +27,9 @@
         </div>
     </form>
 </div>
+
+@section localScripts{ 
+    <script>
+        //write local scrpts for this view only
+    </script>
+}

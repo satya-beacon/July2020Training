@@ -1,32 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using UsermanagementApp.Contracts;
 using UsermanagementApp.Entity;
 using UsermanagementApp.Entity.ViewModels;
 
-namespace UsermanagementApp.Business
+namespace UsermanagementApp.BussinessV2
 {
     public class UserDomain : IUserDomain
     {
         private IRepository repository;
-        private ILogger logger;
-        public UserDomain(IRepository repository, ILogger logger)
+
+        public UserDomain(IRepository repository)
         {
             this.repository = repository;
-            this.logger = logger;
         }
         public void CreateUserprofile(UserProfile userProfile)
         {
-            try
-            {
-                this.repository.CreateUserProfile(userProfile);
-            }
-            catch(Exception ex)
-            {
-                this.logger.LogError($"Exception in bussiness: {ex.Message}");
-            }
-            
-            
+            this.repository.CreateUserProfile(userProfile);
         }
 
         public List<UserProfile> GetAllUsers()
