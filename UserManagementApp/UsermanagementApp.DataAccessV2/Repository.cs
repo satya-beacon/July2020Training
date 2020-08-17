@@ -16,6 +16,10 @@ namespace UsermanagementApp.DataAccessV2
             this.data = new List<UserProfile>();
         }
 
+        public void AddContact(UserContact userContact)
+        {
+            throw new NotImplementedException();
+        }
 
         public void CreateUserProfile(UserProfile userProfile)
         {
@@ -28,6 +32,11 @@ namespace UsermanagementApp.DataAccessV2
             }
 
             this.data.Add(userProfile);
+        }
+
+        public ContactViewModel GetAllContacts(ContactFilterViewModel filterViewModel)
+        {
+            throw new NotImplementedException();
         }
 
         public List<UserProfile> GetAllUsers()

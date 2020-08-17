@@ -13,5 +13,9 @@ namespace UsermanagementApp.Contracts
         List<UserProfile> GetAllUsers();
         UserProfile GetUserprofile(int id);
 
+        void AddContact(UserContact userContact);
+
+        ContactViewModel GetAllContacts(ContactFilterViewModel filterViewModel);
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UsermanagementApp.Contracts;
@@ -17,6 +18,13 @@ namespace UsermanagementApp.DataAccess
             this.context = new UserDbContext();
             this.logger = logger;
         }
+
+        public void AddContact(UserContact userContact)
+        {
+            this.context.UserContacts.Add(userContact);
+            this.context.SaveChanges();
+        }
+
         public void CreateUserProfile(UserProfile userProfile)
         {
             try
@@ -33,6 +41,28 @@ namespace UsermanagementApp.DataAccess
             }
             
           
+        }
+
+        public ContactViewModel GetAllContacts(ContactFilterViewModel filterViewModel)
+        {
+            var outputModel = new ContactViewModel();
+            outputModel.PageIndex = filterViewModel.PageIndex;
+
+            var allContacts = this.context.UserContacts.Include(uc => uc.UserProfile).Where(uc => uc.UserProfile.Username == filterViewModel.Username).ToList();
+
+            if (filterViewModel != null && !string.IsNullOrEmpty(filterViewModel.SearchString))
+            {
+                allContacts = allContacts.Where(up => up.FirstName.Contains(filterViewModel.SearchString) || up.LastName.Contains(filterViewModel.SearchString)).ToList();
+            }
+
+            outputModel.TotalItems = allContacts.Count;
+
+            if (filterViewModel != null && filterViewModel.PageIndex > 0 && filterViewModel.PageSize > 0)
+            {
+                outputModel.Items = allContacts.Skip((filterViewModel.PageIndex - 1) * filterViewModel.PageSize).Take(filterViewModel.PageSize).ToList();
+            }
+
+            return outputModel;
         }
 
         public List<UserProfile> GetAllUsers()

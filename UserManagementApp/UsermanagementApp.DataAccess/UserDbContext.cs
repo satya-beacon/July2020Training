@@ -13,8 +13,10 @@ namespace UsermanagementApp.DataAccess
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<UserProfile>().ToTable("UserProfile");
+            modelBuilder.Entity<UserContact>().ToTable("UserContacts");
         }
 
         public DbSet<UserProfile> Userprofiles { get; set; }
+        public DbSet<UserContact> UserContacts { get; set; }
     }
 }

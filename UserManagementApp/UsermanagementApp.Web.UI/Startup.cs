@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using UsermanagementApp.Contracts;
 using UsermanagementApp.ConsoleLog;
+using UsermanagementApp.Business;
 
 namespace UsermanagementApp.Web.UI
 {
@@ -29,7 +30,7 @@ namespace UsermanagementApp.Web.UI
 
             services.AddSession(options =>
             {
-                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
@@ -37,9 +38,10 @@ namespace UsermanagementApp.Web.UI
             services.AddControllersWithViews();
             services.AddHttpContextAccessor();
 
-            services.AddSingleton<IRepository, DataAccess.Repository>();
-            services.AddSingleton<IUserDomain, Business.UserDomain>();
-            services.AddSingleton<ILogger, ConsoleLogger>();
+            services.AddScoped<IRepository, DataAccess.Repository>();
+            services.AddScoped<IUserDomain, Business.UserDomain>();
+            services.AddScoped<ILogger, ConsoleLogger>();
+            services.AddScoped<IContactDomain, ContactDomain>();
 
            
         }
