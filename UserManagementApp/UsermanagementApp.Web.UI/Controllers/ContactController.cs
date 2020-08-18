@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -11,6 +12,7 @@ using UsermanagementApp.Entity.ViewModels;
 
 namespace UsermanagementApp.Web.UI.Controllers
 {
+    [Authorize]
     public class ContactController : Controller
     {
         private IContactDomain contactDomain;
@@ -22,12 +24,10 @@ namespace UsermanagementApp.Web.UI.Controllers
         }
         public IActionResult Index(int pageIndex =0)
         {
-            var loggedUsername = HttpContext.Session.GetString("userToken");
-
             
             var filterViewModel = new ContactFilterViewModel()
             {
-                Username = loggedUsername,
+                Username = User.Identity.Name,
                 PageIndex = pageIndex > 0 ? pageIndex : 1,
                 PageSize = 2
             };
@@ -58,8 +58,7 @@ namespace UsermanagementApp.Web.UI.Controllers
                 ViewData["BadRequest"] = "Model is not valid. Please fill all the requried fields!";
                 return View();
             }
-            var loggedUsername = HttpContext.Session.GetString("userToken");
-            var userProfile = this.userDomain.GetUserprofile(loggedUsername);
+            var userProfile = this.userDomain.GetUserprofile(User.Identity.Name);
             userContact.UserId = userProfile.Id;
             this.contactDomain.AddContact(userContact);
             return RedirectToAction("Index");

@@ -28,7 +28,7 @@
                     <li class="nav-item">
                         <a href="~/Home/Index" class="nav-link">Home</a>
                     </li>
-                    @if (HttpContextAccessor.HttpContext.Session.GetString("userToken") == null)
+                    @if (!User.Identity.IsAuthenticated)
                     {
                         <li class="nav-item"><a class="nav-link" href="~/Account/Login" title="Login" target="_self">Login</a></li>
                         <li class="nav-item"><a class="nav-link" href="~/Account/Signup" title="Signup" target="_blank">Signup</a></li>

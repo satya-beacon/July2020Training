@@ -11,6 +11,8 @@ using Microsoft.Extensions.Hosting;
 using UsermanagementApp.Contracts;
 using UsermanagementApp.ConsoleLog;
 using UsermanagementApp.Business;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using UsermanagementApp.Web.UI.Helpers;
 
 namespace UsermanagementApp.Web.UI
 {
@@ -30,13 +32,19 @@ namespace UsermanagementApp.Web.UI
 
             services.AddSession(options =>
             {
-                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.IdleTimeout = TimeSpan.FromMinutes(Convert.ToDouble(this.Configuration["SessionTimeout"]));
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
 
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie();
+
             services.AddControllersWithViews();
             services.AddHttpContextAccessor();
+
+            services.Configure<EmailSettings>(options => Configuration.GetSection("EmailSettings").Bind(options));
 
             services.AddScoped<IRepository, DataAccess.Repository>();
             services.AddScoped<IUserDomain, Business.UserDomain>();
@@ -64,6 +72,8 @@ namespace UsermanagementApp.Web.UI
 
             app.UseRouting();
 
+            app.UseCookiePolicy();
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseSession();

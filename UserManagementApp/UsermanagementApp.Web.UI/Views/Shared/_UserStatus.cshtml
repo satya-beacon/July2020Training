@@ -2,12 +2,12 @@
 @inject IHttpContextAccessor HttpContextAccessor
 
 
-@if (HttpContextAccessor.HttpContext.Session.GetString("userToken") == null)
+@if (!User.Identity.IsAuthenticated)
 {
     <span>[Hello Guest!]</span>
 
 }
 else
 {
-<span>[Hello @HttpContextAccessor.HttpContext.Session.GetString("userToken")!]</span>
+<span>[Hello @User.Identity.Name]</span>
 }

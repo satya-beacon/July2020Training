@@ -1,6 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading;
 using UsermanagementApp.Contracts;
 using UsermanagementApp.Entity;
@@ -8,22 +12,34 @@ using UsermanagementApp.Entity.ViewModels;
 
 namespace UsermanagementApp.Web.UI.Controllers
 {
+    [Authorize]
     public class AccountController : Controller
     {
         private IUserDomain userDomain;
         private ILogger logger;
+
+        public string LoggedUser
+        {
+            get
+            {
+                return User.Identity.Name;
+            }
+        }
 
         public AccountController(IUserDomain userDomain, ILogger logger)
         {
             this.userDomain = userDomain;
             this.logger = logger;
         }
+
+        [AllowAnonymous]
         public IActionResult Login()
         {
             ViewData["Title"] = "Login";
             return View();
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public IActionResult Login(LoginViewModel loginViewModel)
         {
@@ -39,7 +55,24 @@ namespace UsermanagementApp.Web.UI.Controllers
             if (isValid)
             {
                 this.logger.LogInfo("You logged!");
-                HttpContext.Session.SetString("userToken", loginViewModel.Username);
+               
+                var identity = new ClaimsIdentity(new[] {
+                    new Claim(ClaimTypes.Name, loginViewModel.Username),                    
+                }, CookieAuthenticationDefaults.AuthenticationScheme);
+
+                if(loginViewModel.Username == "admin")
+                {
+                    identity.AddClaim(new Claim(ClaimTypes.Role, "Admin"));
+                }
+                else
+                {
+                    identity.AddClaim(new Claim(ClaimTypes.Role, "User"));
+                }
+               
+                var principal = new ClaimsPrincipal(identity);
+
+                HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+
                 return RedirectToAction("Welcome");
             }
             else
@@ -49,13 +82,15 @@ namespace UsermanagementApp.Web.UI.Controllers
             }
            
         }
-
+        
+        [AllowAnonymous]
         public IActionResult Signup()
         {
             ViewData["Title"] = "Signup";
             return View();
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public IActionResult Signup(UserProfile userProfile)
         {
@@ -71,11 +106,10 @@ namespace UsermanagementApp.Web.UI.Controllers
         public IActionResult Welcome()
         {
             ViewData["Title"] = "Welcome";
-            var loggedUsername = HttpContext.Session.GetString("userToken");
             UserProfile userProfile = null;
-            if (!string.IsNullOrEmpty(loggedUsername))
+            if (!string.IsNullOrEmpty(User.Identity.Name))
             {
-                userProfile = this.userDomain.GetUserprofile(loggedUsername);
+                userProfile = this.userDomain.GetUserprofile(LoggedUser);
             }
             else
             {
@@ -84,11 +118,15 @@ namespace UsermanagementApp.Web.UI.Controllers
             return View(userProfile);
         }
 
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
+
         public IActionResult ProfileView(int? id)
         {
             ViewData["Title"] = "My Profile";
-            var loggedUsername = HttpContext.Session.GetString("userToken");
-           
+          
             UserProfile userProfile = null;
             
             if(id != null && id > 0)
@@ -97,9 +135,9 @@ namespace UsermanagementApp.Web.UI.Controllers
             }
             else
             {
-                if (!string.IsNullOrEmpty(loggedUsername))
+                if (!string.IsNullOrEmpty(LoggedUser))
                 {
-                    userProfile = this.userDomain.GetUserprofile(loggedUsername);
+                    userProfile = this.userDomain.GetUserprofile(LoggedUser);
                 }
                 else
                 {
@@ -113,9 +151,11 @@ namespace UsermanagementApp.Web.UI.Controllers
 
         public IActionResult Signout()
         {
-            HttpContext.Session.Clear();
+            HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Login");
         }
+
+       [Authorize(Roles = "Admin")]
         public IActionResult ViewAll(string searchString)
         {
             var allUsers = this.userDomain.GetAllUsers();
@@ -130,7 +170,6 @@ namespace UsermanagementApp.Web.UI.Controllers
         public IActionResult EditProfile(int? id)
         {
             ViewData["Title"] = "Edit Profile";
-            var loggedUsername = HttpContext.Session.GetString("userToken");
 
             UserProfile userProfile = null;
 

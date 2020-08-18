@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,9 +14,9 @@ namespace UsermanagementApp.DataAccess
         private UserDbContext context;
         private ILogger logger;
 
-        public Repository(ILogger logger)
+        public Repository(ILogger logger, IConfiguration configuration)
         {
-            this.context = new UserDbContext();
+            this.context = new UserDbContext(configuration);
             this.logger = logger;
         }
 

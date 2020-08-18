@@ -1,13 +1,19 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using UsermanagementApp.Entity;
 
 namespace UsermanagementApp.DataAccess
 {
     public class UserDbContext : DbContext
     {
+        private IConfiguration configuration;
+        public UserDbContext(IConfiguration configuration)
+        {
+            this.configuration = configuration;
+        }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=sbx-01-sql-cti-ctidm.corp.fmglobal.com,1010;Database=WebLoginDb;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer(this.configuration["SqlConnectionString"]);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
