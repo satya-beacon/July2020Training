@@ -27,7 +27,7 @@ namespace UsermanagementApp.Web.UI.Controllers
             
             var filterViewModel = new ContactFilterViewModel()
             {
-                Username = User.Identity.Name,
+                Username = User?.Identity?.Name,
                 PageIndex = pageIndex > 0 ? pageIndex : 1,
                 PageSize = 2
             };

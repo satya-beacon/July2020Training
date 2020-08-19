@@ -13,11 +13,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UsermanagementApp.DataAcces
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UsermanagementApp.Contracts", "UsermanagementApp.Contracts\UsermanagementApp.Contracts.csproj", "{7FFD582A-D78F-4861-8434-22C55DAF8184}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsermanagementApp.DataAccessV2", "UsermanagementApp.DataAccessV2\UsermanagementApp.DataAccessV2.csproj", "{E3377570-6E56-46F4-AA26-7560088D0995}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UsermanagementApp.DataAccessV2", "UsermanagementApp.DataAccessV2\UsermanagementApp.DataAccessV2.csproj", "{E3377570-6E56-46F4-AA26-7560088D0995}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsermanagementApp.BussinessV2", "UsermanagementApp.BussinessV2\UsermanagementApp.BussinessV2.csproj", "{BC13F713-D175-439D-8F47-DC69F075E5DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UsermanagementApp.BussinessV2", "UsermanagementApp.BussinessV2\UsermanagementApp.BussinessV2.csproj", "{BC13F713-D175-439D-8F47-DC69F075E5DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsermanagementApp.ConsoleLogger", "UsermanagementApp.ConsoleLogger\UsermanagementApp.ConsoleLogger.csproj", "{F0387AAC-D205-4263-9F08-40937EB200CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UsermanagementApp.ConsoleLogger", "UsermanagementApp.ConsoleLogger\UsermanagementApp.ConsoleLogger.csproj", "{F0387AAC-D205-4263-9F08-40937EB200CB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsermanagemenApp.Web.Test", "UsermanagemenApp.Web.Test\UsermanagemenApp.Web.Test.csproj", "{2FF0BD72-6F64-4A96-AAA3-5DEE5BC08D91}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleBusiness", "SampleBusiness\SampleBusiness.csproj", "{96E57B3C-FB1A-427D-BFF5-53265A93E529}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +61,14 @@ Global
 		{F0387AAC-D205-4263-9F08-40937EB200CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F0387AAC-D205-4263-9F08-40937EB200CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F0387AAC-D205-4263-9F08-40937EB200CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FF0BD72-6F64-4A96-AAA3-5DEE5BC08D91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FF0BD72-6F64-4A96-AAA3-5DEE5BC08D91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FF0BD72-6F64-4A96-AAA3-5DEE5BC08D91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FF0BD72-6F64-4A96-AAA3-5DEE5BC08D91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96E57B3C-FB1A-427D-BFF5-53265A93E529}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96E57B3C-FB1A-427D-BFF5-53265A93E529}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96E57B3C-FB1A-427D-BFF5-53265A93E529}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96E57B3C-FB1A-427D-BFF5-53265A93E529}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -22,7 +22,7 @@ namespace UsermanagementApp.Web.UI.Controllers
         {
             get
             {
-                return User.Identity.Name;
+                return User?.Identity?.Name;
             }
         }
 
