@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Product App</title>
+        <script src="app.js"></script>
+        <script src="site.js"></script>
+    </head>
+    <body>
+       <h2>Product Manager App</h2>
+       <div id="add-edit-section">
+            <form id="frmProd" name="frmProd">
+                <fieldset>
+                    <legend>Product Form</legend>
+                    <div>
+                        <label>Product Name:</label>
+                        <input type="text" id="txtProductId" name="txtProduct" />
+                    </div>
+    
+                    <div>
+                        <label>Price: </label>
+                        <input type="number" id="txtProductPrice" name="txtProductPrice"/>
+                    </div>
+    
+                    <div>
+                        <label>Category: </label>
+                        <select id="ddlCategory" name="ddlCategory">
+                            <option selected="selected">Please select</option>
+                            <option value="Mobile">Mobile</option>
+                            <option value="Tablet">Tablet</option>
+                            <option value="Laptop">Laptop</option>
+                            <option value="Descktop">Desktop</option>
+                        </select>
+                    </div>
+                    <div>
+                        <button type="button" onclick="SaveProduct()">Add Product</button>
+                        <button type="button" onclick="showGrid()">Cancel</button>
+                    </div>
+
+                </fieldset>
+              
+            </form>
+       </div>
+
+       <div id="display-grid">
+           <div>
+               <button type="button" onclick="showAddEditSection()">Add New Product</button>
+           </div>
+            <h3>Products Grid</h3>
+            <div>
+                Search By Name : <input type="text" id="txtSearchKey" name="txtSearchKey"/> <button type="button" onclick="filterData()">Filter</button>
+            </div>
+          <div id="grid">
+
+          </div>
+       </div>
+    </body>
+</html>
