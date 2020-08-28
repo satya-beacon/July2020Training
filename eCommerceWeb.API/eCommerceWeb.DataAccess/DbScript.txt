@@ -1,0 +1,9 @@
+﻿CREATE database eCommerceDb
+
+USE eCommerceDb
+
+
+CREATE TABLE Category(
+ID INT IDENTITY PRIMARY KEY,
+Name NVARCHAR(100),
+[Description] NVARCHAR(MAX))
