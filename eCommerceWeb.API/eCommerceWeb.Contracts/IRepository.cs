@@ -1,12 +1,13 @@
 ﻿using eCommerceWeb.Entity;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace eCommerceWeb.Contracts
 {
     public interface IRepository
     {
-        int AddCategory(Category category);
-        Category GetCategoryById(int id);
-        List<Category> GetAllCategories();
+        Task<int> AddCategory(Category category);
+        Task<Category> GetCategoryById(int id);
+        Task<List<Category>> GetAllCategories();
     }
 }

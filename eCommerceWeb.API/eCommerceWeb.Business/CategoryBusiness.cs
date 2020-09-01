@@ -3,6 +3,7 @@ using eCommerceWeb.Entity;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace eCommerceWeb.Business
 {
@@ -15,19 +16,19 @@ namespace eCommerceWeb.Business
             this.repository = repository;
         }
 
-        public int AddCategory(Category category)
+        public async Task<int> AddCategory(Category category)
         {
-            return this.repository.AddCategory(category);
+            return await this.repository.AddCategory(category);
         }
 
-        public List<Category> GetAllCategories()
+        public async Task<List<Category>> GetAllCategories()
         {
-            return this.repository.GetAllCategories();
+            return await this.repository.GetAllCategories();
         }
 
-        public Category GetCategoryById(int id)
+        public async Task<Category> GetCategoryById(int id)
         {
-            return this.repository.GetCategoryById(id);
+            return await this.repository.GetCategoryById(id);
         }
     }
 }

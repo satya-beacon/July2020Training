@@ -3,7 +3,7 @@ using eCommerceWeb.Entity;
 using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using System.Linq;
-
+using System.Threading.Tasks;
 
 namespace eCommerceWeb.DataAccess
 {
@@ -16,21 +16,21 @@ namespace eCommerceWeb.DataAccess
             eCommerceDbContext = new ECommerceDbContext(configuration);
         }
 
-        public int AddCategory(Category category)
+        public async Task<int> AddCategory(Category category)
         {
             this.eCommerceDbContext.Categories.Add(category);
-            this.eCommerceDbContext.SaveChanges();
+            await this.eCommerceDbContext.SaveChangesAsync();
             return category.Id;
         }
 
-        public List<Category> GetAllCategories()
+        public async Task<List<Category>> GetAllCategories()
         {
-            return this.eCommerceDbContext.Categories.ToList();
+            return await Task.FromResult(this.eCommerceDbContext.Categories.ToList());
         }
 
-        public Category GetCategoryById(int id)
+        public async  Task<Category> GetCategoryById(int id)
         {
-            return this.eCommerceDbContext.Categories.FirstOrDefault(c => c.Id == id);
+            return await Task.FromResult(this.eCommerceDbContext.Categories.FirstOrDefault(c => c.Id == id));
         }
     }
 }

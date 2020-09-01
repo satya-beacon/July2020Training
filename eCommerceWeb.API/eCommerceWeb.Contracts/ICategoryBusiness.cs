@@ -1,6 +1,6 @@
 ﻿using eCommerceWeb.Entity;
 using System.Collections.Generic;
-
+using System.Threading.Tasks;
 
 namespace eCommerceWeb.Contracts
 {
@@ -12,9 +12,9 @@ namespace eCommerceWeb.Contracts
         /// </summary>
         /// <param name="category">Pass the category object</param>
         /// <returns>return status</returns>
-        int AddCategory(Category category);
+        Task<int> AddCategory(Category category);
 
-        Category GetCategoryById(int id);
-        List<Category> GetAllCategories();
+        Task<Category> GetCategoryById(int id);
+        Task<List<Category>> GetAllCategories();
     }
 }
