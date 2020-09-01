@@ -13,7 +13,7 @@ namespace eCommerceWeb.API.Controllers
 {
     [Route("api/eCommerce")]
     [ApiController]
-    
+    [Helpers.Authorize]
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryBusiness categoryBusiness;

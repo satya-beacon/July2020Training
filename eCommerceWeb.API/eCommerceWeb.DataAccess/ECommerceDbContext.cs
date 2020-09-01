@@ -23,8 +23,10 @@ namespace eCommerceWeb.DataAccess
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Category>().ToTable("Category");
+            modelBuilder.Entity<User>().ToTable("Users");
         }
 
         public DbSet<Category> Categories { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }

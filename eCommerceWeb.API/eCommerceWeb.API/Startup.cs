@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using eCommerceWeb.API.Helpers;
 using eCommerceWeb.Business;
 using eCommerceWeb.Contracts;
 using eCommerceWeb.DataAccess;
@@ -15,6 +16,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
 
 namespace eCommerceWeb.API
 {
@@ -43,14 +45,46 @@ namespace eCommerceWeb.API
                 });
 
 
+                options.AddSecurityDefinition("JWT", new OpenApiSecurityScheme
+                {
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey,
+                    In = ParameterLocation.Header,
+                    Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+                });
+
+                options.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                          new OpenApiSecurityScheme
+                            {
+                                Reference = new OpenApiReference
+                                {
+                                    Type = ReferenceType.SecurityScheme,
+                                    Id = "JWT"
+                                }
+                            },
+                            new string[] {}
+                    }
+                });
+
+
+
+
                 // Set the comments path for the Swagger JSON and UI.
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 options.IncludeXmlComments(xmlPath);
             });
 
+            // configure strongly typed settings object
+            services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
+
+
             services.AddTransient<IRepository, Repository>();
             services.AddTransient<ICategoryBusiness, CategoryBusiness>();
+            services.AddTransient<IUserBusiness, UserBusiness>();
+            services.AddTransient<IUserService, UserService>();
 
         }
 
@@ -67,7 +101,7 @@ namespace eCommerceWeb.API
             app.UseRouting();
 
             app.UseAuthorization();
-
+            app.UseMiddleware<JwtMiddleware>();
 
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
