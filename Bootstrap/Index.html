@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>jQuery Demo</title>
+        <script src="scripts/jquery-3.5.1.min.js"></script>
+
+        <style>
+            dt {
+                padding: 10px;
+                margin: 10px;
+            }
+
+
+            dl#skill-list dt:nth-child(2n+1) {
+                background-color: blueviolet;
+            }
+
+            dl#skill-list dt:nth-child(2n) {
+                background-color: burlywood;
+            }
+        </style>
+
+
+        <script>
+            //on page ready/load
+            $(document).ready(function() {
+
+
+                //fire click event for button "btnSubmit"
+                $("#btnSubmit").click(function(){
+                        var input = $("#txtName").val();
+
+                        $("#message").html("Hello.." + input);
+                });
+
+
+                $("dl#skill-list dt").next().hide();
+
+                $("dl#skill-list dt").click(function() {
+                    $(this).next().toggle();
+                });
+
+
+                $.ajax({
+                    url: 'https://jsonplaceholder.typicode.com/posts',
+                    method: 'get',
+                    success: function(response ) {
+                        var table = "<table><tr><th>Id</th><th>Title</th></tr>";
+                        response.forEach(item => {
+                            table += "<tr><td>"+ item.id +"</td><td>" + item.title+"</td></tr>";
+                        });
+
+                        table += "</table>";
+
+
+                        $("#grid").html(table);
+                    }
+                })
+            });
+        </script>
+    </head>
+    <body>
+
+    <div id="main-section"> 
+        <form name="sampleForm" id="sampleForm">
+            <div>
+                <label for="txtName">Name : </label>
+                <input type="text" id="txtName" name="txtName" placeholder="enter name"/>
+            </div>
+            <div>
+                <button type="button" id="btnSubmit" >Submit</button>
+            </div>
+            <div id="message">
+
+            </div>
+        </form>
+
+        <br>
+        <br>
+
+        <dl id="skill-list">
+            <dt>jQuery</dt>
+            <dd>jQuery is all about JavaScript library for making things faster</dd>
+
+            <dt>Media Queries</dt>
+            <dd>It is for building Responsive Web Design</dd>
+
+            <dt>Angular</dt>
+            <dd>It is for building Single page application</dd>
+        </dl>
+
+
+        <div id="grid">
+
+        </div>
+    </div>
+    </body>
+</html>

@@ -1,0 +1,20 @@
+.vh-5 {
+    height: 50px;
+}
+
+.vh-90 {
+    height: 400px;
+}
+
+.logo {
+    height: 100px;
+    width: 100px;
+}
+
+.main-content {
+    padding-top: 100px;
+}
+
+.font-style-italic {
+    font-style: italic;
+}

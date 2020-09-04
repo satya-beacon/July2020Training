@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>RWD App</title>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width= device-width, initial-scale = 1.0"/>
+        
+        <link rel="stylesheet" href="css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="css/site.css" />
+        <script src="js/popper.min.js"></script>
+        <script src="/js//jquery-3.5.1.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <header class="container-fluid vh-5">
+            <div class="row">
+                <div class="col-xs-4 col-sm-5 col-md-6">
+                    <img src="images/logo.jpg" alt="logo" class="logo img-thumbnail" />
+                </div>
+                <div class="col-xs-8 col-sm-7 col-md-6">
+                    <div class="float-right">
+                        <h2>Bootstrap App</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                        <a class="navbar-brand" href="#">Navbar</a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                          <span class="navbar-toggler-icon"></span>
+                        </button>
+                      
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                          <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active">
+                              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link" href="#">Link</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Dropdown
+                              </a>
+                              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                              </div>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                            </li>
+                          </ul>
+                          <form class="form-inline my-2 my-lg-0">
+                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                          </form>
+                        </div>
+                      </nav>
+                </div>
+            </div>
+        </header>
+
+        <section class="container-fluid vh-90 main-content">
+            <main>
+                <div class="row">
+                    <div class="col-4">
+                        <div class="card">
+                             <div class="card-header">
+                                <h3>Side links</h3>
+                             </div>
+                             <ul class="list-group">
+                                <li class="list-group-item list-group-item-action">
+                                    <a href="" >News</a>
+                                </li>
+                                <li class="list-group-item list-group-item-action">
+                                    <a href="" >Sites</a>
+                                </li>
+                                <li class="list-group-item list-group-item-action">
+                                    <a href="" >Articles</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div> 
+                    <div class="col-8">
+                        <div class="container">
+                            <p class="jumbotron">Main Content</p>
+
+                           <div class="card">
+                                <div class="card-header text-center">
+                                    <h4 class="font-weight-bold text-primary">Table Summary</h4>
+                                </div>
+                                <div class="card-body">
+                                    <table class="table">
+                                        <thead class="thead-dark">
+                                          <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">First</th>
+                                            <th scope="col">Last</th>
+                                            <th scope="col">Handle</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          <tr>
+                                            <th scope="row">1</th>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>@mdo</td>
+                                          </tr>
+                                          <tr>
+                                            <th scope="row">2</th>
+                                            <td>Jacob</td>
+                                            <td>Thornton</td>
+                                            <td>@fat</td>
+                                          </tr>
+                                          <tr>
+                                            <th scope="row">3</th>
+                                            <td>Larry</td>
+                                            <td>the Bird</td>
+                                            <td>@twitter</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                </div>
+
+                                <div class="card-footer text-center">
+                                    <span class="font-style-italic text-info">Test Info</span>
+                                </div>
+                           </div>
+
+                            
+                           <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    Launch demo modal
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </section>
+
+        <footer class="container-fluid vh-5">
+            <span>footer</span>
+        </footer>
+    </body>
+</html>
