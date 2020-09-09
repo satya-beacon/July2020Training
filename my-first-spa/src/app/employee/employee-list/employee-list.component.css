@@ -1,0 +1,8 @@
+table thead  {
+    background-color: #b5b5b5;
+}
+
+table thead tr th, table tbody tr td {
+    padding: 10px;
+    margin: 10px;
+}
