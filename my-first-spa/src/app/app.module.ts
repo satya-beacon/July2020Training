@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 //import employee module 
 import { EmployeeModule } from './employee/employee.module';
 
+
 @NgModule({
   declarations: [
     AppComponent,    
