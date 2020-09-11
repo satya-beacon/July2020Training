@@ -1,5 +1,6 @@
 import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { Employee } from '../../models/employee';
+import { EmployeeService } from '../../employee.service';
 
 @Component({
     selector: 'employee-search',
@@ -12,11 +13,14 @@ export class EmployeeSearchComponent {
 
     @Input() allEmployees: Employee[];
 
+    constructor(private employeeService: EmployeeService){
+
+    }
 
     search(event : any){
         let tempEployees = [];
         if(this.filterQuery !== null && this.filterQuery !== undefined && this.filterQuery != ''){
-            tempEployees = this.allEmployees.filter(emp => emp.name.toLowerCase().indexOf(this.filterQuery.toLowerCase()) !== -1);
+            tempEployees = this.employeeService.searchEmployeeByName(this.filterQuery);
         }else{
            tempEployees = this.allEmployees;
         }

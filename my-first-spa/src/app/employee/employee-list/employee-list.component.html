@@ -1,7 +1,7 @@
 <h3>Employee List</h3>
 <div class="row">
     <div class="col-12">
-        <button class="btn btn-primary">Add New</button>
+        <a routerLink="/add-edit-employee" routerLinkActive="active" class="btn btn-primary">Add New</a>
     </div>
 </div>
 <div class="row">
@@ -29,9 +29,9 @@
                     <td>{{item.address}}</td>
                     <td>{{item.salary}}</td>
                     <td>
-                        <button class="btn btn-link" type="button" (click)="onSetSelectedEmployee(item)" >View</button>    
-                        <button class="btn btn-info" type="button" (click)="onSetSelectedEmployee(item)" >Edit</button>
-                        <button class="btn btn-danger" type="button" (click)="onSetSelectedEmployee(item)" >Delete</button>
+                        <a routerLink="/employees/{{item.id}}" routerLinkActive="active" class="btn btn-link">View</a>    
+                        <button class="btn btn-info" type="button"  >Edit</button>
+                        <button class="btn btn-danger" type="button"  >Delete</button>
                     </td>
                 </tr>
             </tbody>
@@ -39,9 +39,5 @@
     </div>
 </div>
 
-
-<ng-container *ngIf="selectedEmployee">
-    <bfs-employee-detail [employee]="selectedEmployee"></bfs-employee-detail>
-</ng-container>
 
 <a [href]="siteUrl" target="_blank">{{siteUrlText}}</a>
