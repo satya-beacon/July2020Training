@@ -1,0 +1,37 @@
+<div class="container">
+   <div class="row">
+    <div class="col-12">
+        <header>
+            <h3>Event List</h3>
+        </header>
+    </div>
+   </div>
+
+   <div class="row">
+        <div class="col-12">
+            <table class="table table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th class="text-center">Id</th>
+                        <th class="text-center">Title</th>
+                        <th class="text-center">Published Date</th>
+                        <th class="text-center">Created Date</th>
+                        <th class="text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let event of events">
+                        <td>{{event.eventId}}</td>
+                        <td>{{event.Title}}</td>
+                        <td>{{event.publishedDate | date}}</td>
+                        <td>{{event.dateCreated | date}}</td>
+                        <td>
+                            <a class="btn btn-link" routerLink="/events/{{event.eventId}}" routerLinkActive="active">View</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+   </div>
+    
+</div>

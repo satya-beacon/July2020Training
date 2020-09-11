@@ -12,6 +12,9 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 //import user module
 import { UserModule } from './user/user.module';
 
+//import events module
+import { EventsModule } from './events/events.module';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,6 +27,7 @@ import { UserModule } from './user/user.module';
   imports: [
     BrowserModule,
     UserModule,
+    EventsModule,
     AppRoutingModule
   ],
   providers: [],
