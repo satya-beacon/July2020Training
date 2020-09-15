@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserLoginModel } from '../../models/login.model';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,7 @@ export class LoginComponent implements OnInit {
   isSubmitted = false;
   invalidCrenential = null;
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private userService: UserService, private router: Router, private authServie: AuthService) { }
 
   ngOnInit(): void {
     this.loginModel = { username: undefined, password: undefined};
@@ -23,10 +24,25 @@ export class LoginComponent implements OnInit {
     //validate yoru login
     if(this.isFormValid){
       this.isSubmitted = false;
-      const isValid = this.userService.validateLogin(this.loginModel);
+      let  isValid = false;
+     
+      this.userService.validateLogin(this.loginModel).subscribe(val => {
+        isValid = val;
+      });
+
+
       if(isValid){
-       let loggedUser = this.userService.getUserByUsername(this.loginModel.username);
+       let loggedUser;
+       
+       this.userService.getUserByUsername(this.loginModel.username).subscribe(response => {
+          loggedUser = response;
+        });
+        
        sessionStorage.setItem('userToken', loggedUser.username);
+      
+       //emit the value to subject observable to trigger the event
+       this.authServie.login();
+       
        if(loggedUser.username === 'admin') {
         this.router.navigate(['/admin']);
        }else{

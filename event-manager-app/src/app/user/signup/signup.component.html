@@ -1,0 +1,57 @@
+<div class="container">
+   <form id="signUpForm" name="signUpForm" [formGroup]="signupForm" (ngSubmit)="onSubmit($event)">
+       <div class="form-group row">
+            <label for="txtUsername" class="form-control-label">Username: </label>
+            <input type="text" id="txtUsername" name="txtUsername" class="form-control" formControlName="username"/>
+            <div *ngIf="signupForm.get('username').invalid && isSubmitted">
+                <span class="alert alert-danger">Username field is required.</span>
+            </div>
+       </div>
+
+       <div class="form-group row">
+        <label for="txtPassword" class="form-control-label">Password: </label>
+        <input type="password" id="txtPassword" name="txtPassword" class="form-control" formControlName="password"/>
+        <div *ngIf="signupForm.get('password').invalid && isSubmitted">
+            <span class="alert alert-danger">Password field is required.</span>
+        </div>
+        </div>
+
+    <div class="form-group row">
+        <label for="txtFirstName" class="form-control-label">FirstName: </label>
+        <input type="text" id="txtFirstName" name="txtFirstName" class="form-control" formControlName="firstName"/>
+        <div *ngIf="signupForm.get('firstName').invalid && isSubmitted">
+            <span class="alert alert-danger">FirstName field is required.</span>
+        </div>
+        </div>
+
+    <div class="form-group row">
+        <label for="txtLastName" class="form-control-label">LastName: </label>
+        <input type="text" id="txtLastName" name="txtLastName" class="form-control" formControlName="lastName"/>
+    </div>
+
+    <div class="form-group row">
+        <label for="txtEmail" class="form-control-label">Email: </label>
+        <input type="text" id="txtEmail" name="txtEmail" class="form-control" formControlName="email"/>
+    </div>
+
+    <div class="form-group row">
+        <label for="txtMobile" class="form-control-label">Mobile: </label>
+        <input type="text" id="txtMobile" name="txtMobile" class="form-control" formControlName="mobile"/>
+    </div>
+
+    <div class="form-group row">
+        <div *ngFor="let option of options; let i = index;" class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="genderRadio{{i}}" name="gender" class="custom-control-input" formControlName="gender" [value]="option.value">
+            <label class="custom-control-label" for="genderRadio{{i}}">{{option.label}}</label>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="float-right">
+            <button type="submit" class="btn btn-primary mr-1">Submit</button>
+            <button type="reset" class="btn btn-warning ml-1">Cancel</button>
+        </div>
+    </div>
+
+   </form>
+</div>

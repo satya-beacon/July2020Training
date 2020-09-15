@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { UserLoginModel } from '../models/login.model';
 import { UserModel } from '../models/user.model';
 import { USERDATA } from './mock/user-mock.data';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -20,28 +21,36 @@ export class UserService {
     }
 
 
-    public getUsers() : UserModel [] {
-        return this.data;
+    public getUsers() : Observable<UserModel []> {
+        return of(this.data);
     }
 
 
-    public validateLogin(userLoginModel :UserLoginModel): boolean {
+    public validateLogin(userLoginModel :UserLoginModel): Observable<boolean> {
         var result = this.data.filter(u => u.username === userLoginModel.username && u.password === userLoginModel.password);
         
         if(result != null && result.length === 1){
-           return true;
+           return of(true);
         }
 
-        return false;
+        return of(false);
     }
 
 
-    public getUserByUsername(username : string): UserModel {
+    public getUserByUsername(username : string): Observable<UserModel> {
         let userModel = null;
         let result = this.data.filter(u => u.username === username);
         if(result != null && result.length === 1){
             userModel = result[0];
         }
-        return userModel;
+        return of(userModel);
+    }
+
+
+    public addUser(userModel: UserModel) : Observable<number> {
+        userModel.id = this.data.length +1;
+        this.data.push(userModel);
+        localStorage.setItem('users', JSON.stringify(this.data));
+        return of(userModel.id);
     }
 }

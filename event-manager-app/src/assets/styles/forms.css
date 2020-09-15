@@ -1,0 +1,7 @@
+.ng-valid[required] {
+    border-left: 5PX solid green;
+}
+
+.ng-invalid[required] {
+    border-left: 5PX solid red;
+}

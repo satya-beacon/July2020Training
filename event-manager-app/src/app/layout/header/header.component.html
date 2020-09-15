@@ -16,7 +16,7 @@
             </li>
 
             <li class="nav-item" *ngIf="!isAuthenticated">
-              <a class="nav-link" routerLink="singup" routerLinkActive="active">Signup</a>
+              <a class="nav-link" routerLink="signup" routerLinkActive="active">Signup</a>
             </li>
             <li class="nav-item" *ngIf="!isAuthenticated">
                 <a class="nav-link" routerLink="login" routerLinkActive="active" >Login</a>
@@ -29,6 +29,9 @@
                 <a class="nav-link" class="btn btn-link" (click)="logout($event)">Logout</a>
               </li>
           </ul>
+          <div class="float-right">
+            <span class="text-primary">{{timespan}}</span>
+          </div>
         </div>
       </nav>
 </div>
