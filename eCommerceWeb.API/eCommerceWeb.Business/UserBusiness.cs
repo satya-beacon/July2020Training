@@ -24,6 +24,11 @@ namespace eCommerceWeb.Business
             return await this.repository.GetUserById(id);
         }
 
+        public async Task<User> GetUserByName(string username)
+        {
+            return await this.repository.GetUserByName(username);
+        }
+
         public async Task<List<User>> GetUsers()
         {
             return await this.repository.GetUsers();

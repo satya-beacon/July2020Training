@@ -13,5 +13,7 @@ namespace eCommerceWeb.Contracts
         Task<List<User>> GetUsers();
 
         Task<User> GetUserById(int id);
+        
+        Task<User> GetUserByName(string username);
     }
 }

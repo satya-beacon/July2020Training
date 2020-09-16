@@ -9,11 +9,24 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
+
+//import HttpClientModule 
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
 //import user module
 import { UserModule } from './user/user.module';
 
 //import events module
 import { EventsModule } from './events/events.module';
+
+
+//import git module
+import { GitHubModule } from './git/git-hub.module';
+
+
+//import shared module
+import { SharedModule } from './shared/shared.module';
+import { AuthInterceptor } from './shared/http-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -26,11 +39,16 @@ import { EventsModule } from './events/events.module';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
+    SharedModule,
     UserModule,
     EventsModule,
+    GitHubModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass : AuthInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

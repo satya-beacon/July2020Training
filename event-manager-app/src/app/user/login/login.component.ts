@@ -3,6 +3,7 @@ import { UserLoginModel } from '../../models/login.model';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { typeWithParameters } from '@angular/compiler/src/render3/util';
 
 @Component({
   selector: 'app-login',
@@ -24,21 +25,14 @@ export class LoginComponent implements OnInit {
     //validate yoru login
     if(this.isFormValid){
       this.isSubmitted = false;
-      let  isValid = false;
-     
-      this.userService.validateLogin(this.loginModel).subscribe(val => {
-        isValid = val;
-      });
 
+      let loggedUser;
 
-      if(isValid){
-       let loggedUser;
+      this.userService.validateLogin(this.loginModel).subscribe(response => {
        
-       this.userService.getUserByUsername(this.loginModel.username).subscribe(response => {
-          loggedUser = response;
-        });
-        
+       loggedUser = response;
        sessionStorage.setItem('userToken', loggedUser.username);
+       sessionStorage.setItem('token', loggedUser.token);
       
        //emit the value to subject observable to trigger the event
        this.authServie.login();
@@ -48,9 +42,12 @@ export class LoginComponent implements OnInit {
        }else{
         this.router.navigate(['/welcome']);
        }
-      }else {
-      this.invalidCrenential = "Invalid Credentails. Please try again";
-      }
+
+      }, error => {
+        console.log("Error in authenticating user");
+        this.invalidCrenential = "User not exists!";
+      });
+
     }else{
       this.isSubmitted = true;
     }

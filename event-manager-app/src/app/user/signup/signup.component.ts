@@ -49,6 +49,9 @@ export class SignupComponent implements OnInit {
 
       this.userService.addUser(userModel).subscribe(val => {
         this.router.navigate(['login']);
+      }, 
+      error => {
+        console.log("Error in creating user account" + JSON.stringify(error));
       });
 
     }else {

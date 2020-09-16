@@ -1,0 +1,24 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Id</th>
+                        <th>Username</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of gitUsers">
+                        <td>{{user.id}}</td>
+                        <td>{{user.login}}</td>
+                        <td>
+                            <a routerLink="/git/{{user.login}}" routerLinkActive="active" class="btn btn-link">View</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

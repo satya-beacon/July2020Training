@@ -1,0 +1,13 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h3>User Details</h3>
+
+            <div class="jumbotron" *ngIf="gitUserModel">
+                <p>Id: {{gitUserModel.id}}</p>
+                <p>Username: {{gitUserModel.login}}</p>
+                <a routerLink="/git" routerLinkActive="active" class="btn btn-link">&lt;&lt;Go Back</a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -76,5 +76,19 @@ namespace eCommerceWeb.API.Controllers
             var response = await this.userBusiness.GetUsers();
             return Ok(response);
         }
+
+
+        /// <summary>
+        /// Get User By name
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("users/{username}")]
+        [Helpers.Authorize] //This is custom authorize attribute
+        public async Task<ActionResult<User>> GetUserByName(string username)
+        {
+            var response = await this.userBusiness.GetUserByName(username);
+            return Ok(response);
+        }
     }
 }

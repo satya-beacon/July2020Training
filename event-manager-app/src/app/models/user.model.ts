@@ -7,4 +7,5 @@ export interface UserModel {
     email?: string;
     mobile?: string;
     gender?: string;
+    token?: string;
 }

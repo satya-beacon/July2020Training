@@ -50,6 +50,17 @@ namespace eCommerceWeb.DataAccess
             return await Task.FromResult(user);
         }
 
+        public async Task<User> GetUserByName(string username)
+        {
+            var user = this.eCommerceDbContext.Users.FirstOrDefault(u => u.Username == username);
+            if (user == null)
+            {
+                return null;
+            }
+
+            return await Task.FromResult(user);
+        }
+
         public async Task<List<User>> GetUsers()
         {
             return await Task.FromResult(this.eCommerceDbContext.Users.ToList());

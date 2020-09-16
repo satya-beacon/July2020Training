@@ -86,6 +86,20 @@ namespace eCommerceWeb.API
             services.AddTransient<IUserBusiness, UserBusiness>();
             services.AddTransient<IUserService, UserService>();
 
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("default",
+                                  builder =>
+                                  {
+                                      builder.AllowAnyOrigin()
+                                             .AllowAnyHeader()
+                                             .AllowAnyMethod();
+                                  });
+            });
+
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -100,6 +114,7 @@ namespace eCommerceWeb.API
 
             app.UseRouting();
 
+            app.UseCors("default");
             app.UseAuthorization();
             app.UseMiddleware<JwtMiddleware>();
 

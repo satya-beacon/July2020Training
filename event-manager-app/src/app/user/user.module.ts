@@ -14,6 +14,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { AdminComponent } from './admin/admin.component';
 import { SignupComponent } from './signup/signup.component';
 
+
 @NgModule({
   declarations: [LoginComponent, WelcomeComponent, AdminComponent, SignupComponent],
   imports: [

@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="jumbotron">
+    <div class="jumbotron" *ngIf="loggedUser">
         <h3>Welcome to Event Manager App, {{loggedUser.firstName}} {{loggedUser.lastName}}</h3>
     </div>
 </div>
