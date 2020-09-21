@@ -6,7 +6,15 @@
         </header>
     </div>
    </div>
-
+   <br>
+   <div class="row">
+        <div class="col-12">
+            <form>
+                <input type="text" id="txtSearch" name="filterString" class="form-control" [(ngModel)]="searchString">
+            </form>
+        </div>
+   </div>
+<br>
    <div class="row">
         <div class="col-12">
             <table class="table table-hover">
@@ -14,15 +22,17 @@
                     <tr>
                         <th class="text-center">Id</th>
                         <th class="text-center">Title</th>
+                        <th class="text-center">Desc</th>
                         <th class="text-center">Published Date</th>
                         <th class="text-center">Created Date</th>
                         <th class="text-center">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let event of events">
-                        <td>{{event.eventId}}</td>
+                    <tr *ngFor="let event of tempEvents | eventFilter:searchString; let i = index; trackBy: trackByFunction" [ngStyle]="{'background-color': event.isPublished === true ? 'green' : 'cyan' }">
+                        <td>{{event.eventId}} - {{i}}</td>
                         <td>{{event.Title}}</td>
+                        <td><span [truncate]="30" highlight>{{event.longDescription}}</span></td>
                         <td>{{event.publishedDate | date}}</td>
                         <td>{{event.dateCreated | date}}</td>
                         <td>

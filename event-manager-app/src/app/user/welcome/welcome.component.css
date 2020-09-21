@@ -1,0 +1,13 @@
+.super-user {
+    background-color: green;
+    color: indianred;
+    font-family: monospace;
+    font-size: larger;
+}
+
+.simple-user {
+    background-color: blue;
+    color: indianred;
+    font-family: monospace;
+    font-size: larger;
+}
