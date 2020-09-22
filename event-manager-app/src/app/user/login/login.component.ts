@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { UserLoginModel } from '../../models/login.model';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
-import { typeWithParameters } from '@angular/compiler/src/render3/util';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -14,6 +14,8 @@ export class LoginComponent implements OnInit {
   loginModel: UserLoginModel;
   isSubmitted = false;
   invalidCrenential = null;
+
+  @ViewChild("loginForm") loginForm: NgForm;
 
   constructor(private userService: UserService, private router: Router, private authServie: AuthService) { }
 
@@ -61,4 +63,12 @@ export class LoginComponent implements OnInit {
      return false;
   }
 
+
+  public canDeactivate(): boolean {
+    if(this.loginForm.dirty){
+      return false;
+    }
+
+    return true;
+  }
 }

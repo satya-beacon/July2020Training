@@ -23,6 +23,15 @@ export class AuthService {
         }
     }
 
+    public isAuthenticated(): boolean {
+        if(sessionStorage.getItem('userToken') !== null && sessionStorage.getItem('userToken') !== undefined){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
     public getLoggedUser() : Observable<UserModel> {
         if(sessionStorage.getItem('userToken') !== null && sessionStorage.getItem('userToken') !== undefined){
             return this.userService.getUserByUsername(sessionStorage.getItem('userToken'));

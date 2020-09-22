@@ -21,9 +21,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
+   
+    this.loadNavs(this.authService.isAuthenticated());
+
     this.userLoginSubscription = this.authService.isUserLogged.subscribe((val) => {
-      this.isAuthenticated = val;
-      this.isAdmin = this.authService.isAdmin();
+      this.loadNavs(val);
     });
 
 
@@ -33,6 +35,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     });
   }
 
+  private loadNavs(val : boolean) {
+    this.isAuthenticated = val;
+    this.isAdmin = this.authService.isAdmin();
+  }
   logout(event: any) {
     this.authService.signout();
     this.router.navigate(['login']);

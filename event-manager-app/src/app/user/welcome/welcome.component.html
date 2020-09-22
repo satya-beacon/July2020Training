@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="jumbotron" *ngIf="loggedUser">
+    <div class="jumbotron">
         <h3 [ngClass]="{'super-user': loggedUser.username == 'admin', 'simple-user':loggedUser.username != 'admin'}">Welcome to Event Manager App, {{loggedUser.firstName}} {{loggedUser.lastName}}</h3>
     </div>
 </div>

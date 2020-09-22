@@ -58,4 +58,13 @@ export class SignupComponent implements OnInit {
       this.isSubmitted = true;
     }
   }
+
+  public isDirtyComponent(): boolean {
+  
+    if(this.signupForm.dirty){
+      return false;
+    }
+
+    return true;
+  }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { UserModel } from 'src/app/models/user.model';
-import { AuthService } from '../auth.service';
+
 
 @Component({
   selector: 'app-welcome',
@@ -9,13 +10,13 @@ import { AuthService } from '../auth.service';
 })
 export class WelcomeComponent implements OnInit {
   loggedUser: UserModel;
-  constructor(private authService: AuthService) { }
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
    
-     this.authService.getLoggedUser().subscribe(response => {
-       this.loggedUser = response;
-     });
+    this.route.data.subscribe((response) => {
+     this.loggedUser = response.loggedUser;
+    });
   }
 
 }
