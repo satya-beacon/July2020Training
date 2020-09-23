@@ -1,0 +1,28 @@
+@import '_mixins';
+
+.alert {
+    border: 2px solid blue;
+    @include border-radius(10px);
+    background-color: #b5b5b5;
+    padding: 10px;
+    margin:10px;
+}
+
+.alert-success {
+    @extend .alert;
+
+    background-color: green;
+}
+
+.alert-error {
+    @extend .alert;
+
+    background-color: red;
+}
+
+
+.alert-warning {
+    @extend .alert;
+
+    background-color: yellow;
+}

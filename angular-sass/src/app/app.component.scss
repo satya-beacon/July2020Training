@@ -1,0 +1,35 @@
+@import '_variables';
+@import '_mixins';
+
+nav {
+    padding: 10px;
+    margin: 10px;
+
+    ul {
+        background-color: $nav-bg-color;
+        list-style-type: none;
+        li {
+            display: inline;
+            padding: 10px;
+
+            a {
+                font-size: 14px;
+                font-family: $nav-font-family;
+                border: 2px solid gray;
+                @include border-radius(10px);
+
+                &:hover {
+                    color: $nav-link-hover-color;
+                }
+            }            
+        }
+    }
+}
+
+
+h3 {
+    color: $fore-color;
+    background-color: $bg-color;
+    border: 3px solid green;
+    @include border-radius(25px);
+}
