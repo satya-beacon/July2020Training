@@ -6,7 +6,7 @@ import { Directive, ElementRef, AfterViewInit, Input } from '@angular/core';
 export class TrucateDirective implements AfterViewInit {
 
 
-    @Input('truncate') size: number = 10;
+    @Input('truncate') size = 10;
     
     constructor(private el: ElementRef) {
        

@@ -11,15 +11,14 @@ export class EventListComponent implements OnInit {
   events: EventModel[];
   tempEvents: EventModel[];
   searchString: string;
-  
   constructor(private eventService: EventService) { }
 
   ngOnInit(): void {
     this.events = this.eventService.getEvents();
-    this.tempEvents= [...this.events];
+    this.tempEvents = [...this.events];
   }
 
-  trackByFunction(index: number, item: EventModel) : number {
+  trackByFunction(index: number, item: EventModel): number {
     return item.eventId;
   }
 }

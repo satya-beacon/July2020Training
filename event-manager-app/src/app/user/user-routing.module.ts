@@ -11,7 +11,7 @@ import { SignupComponent } from './signup/signup.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { LoggedUserResolverService } from './logged-user-resolver.service';
 
-const routes : Routes = [
+const routes: Routes = [
  { path: 'login', component: LoginComponent, canDeactivate: [LoginCanDeactivateGuard]},
  { path: 'signup', component: SignupComponent, canDeactivate: [SignupCanDeactivateGuard] },
  { path: 'welcome', component: WelcomeComponent, canActivate: [AuthGuard], resolve: { loggedUser: LoggedUserResolverService }},

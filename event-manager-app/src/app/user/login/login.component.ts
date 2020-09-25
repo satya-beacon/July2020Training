@@ -46,8 +46,7 @@ export class LoginComponent implements OnInit {
        }
 
       }, error => {
-        console.log("Error in authenticating user");
-        this.invalidCrenential = "User not exists!";
+        this.invalidCrenential = 'User not exists!';
       });
 
     }else{
@@ -57,10 +56,13 @@ export class LoginComponent implements OnInit {
   }
 
   get isFormValid() {
-    if(this.loginModel.username  && this.loginModel.password)
-     return true;
+    if(this.loginModel.username  && this.loginModel.password) {
+      return true;
+    }
     else 
-     return false;
+    {
+      return false;
+    }
   }
 
 

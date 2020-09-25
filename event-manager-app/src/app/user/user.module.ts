@@ -4,10 +4,10 @@ import { LoginComponent } from './login/login.component';
 
 import { UserRoutingModule } from './user-routing.module';
 
-//import FormsModule for Template driven forms
+// import FormsModule for Template driven forms
 import { FormsModule } from '@angular/forms';
 
-//import module for reactive forms
+// import module for reactive forms
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { WelcomeComponent } from './welcome/welcome.component';

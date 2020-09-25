@@ -1,35 +1,39 @@
-import { TestBed, async } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
+import { TestBed, ComponentFixture } from '@angular/core/testing';
+import { HttpClient, HttpHandler } from '@angular/common/http';
 import { AppComponent } from './app.component';
+import { ConfigService } from './shared/config.service';
 
-describe('AppComponent', () => {
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule
-      ],
-      declarations: [
-        AppComponent
-      ],
-    }).compileComponents();
-  }));
+describe('Testing App Component.', () => {
+    let component: AppComponent;
+    let fixture: ComponentFixture<AppComponent>;
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
-  });
+    beforeEach(() => {
+        
+        // refine the test module by declaring the test component
+        TestBed.configureTestingModule({
+            declarations: [AppComponent],
+            providers: [ConfigService, HttpClient, HttpHandler]
+        });
 
-  it(`should have as title 'event-manager-app'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('event-manager-app');
-  });
+        // create component and test fixture
+        fixture = TestBed.createComponent(AppComponent);
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('event-manager-app app is running!');
-  });
+        // get test component from the fixture
+        component = fixture.componentInstance;
+
+    });
+
+    afterEach(() => {
+        component = null;
+    })
+
+
+    it('should create component', () => {
+        expect(component).toBeDefined();
+    })
+
+
+    it('should clean', () => {
+        component.ngOnDestroy();
+    })
 });

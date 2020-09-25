@@ -33,7 +33,7 @@ export class SignupComponent implements OnInit {
 
 
   onSubmit(event: any) {
-    //write logic to save
+    // write logic to save
     if(this.signupForm.valid) {
       this.isSubmitted = false;
      
@@ -51,7 +51,7 @@ export class SignupComponent implements OnInit {
         this.router.navigate(['login']);
       }, 
       error => {
-        console.log("Error in creating user account" + JSON.stringify(error));
+        console.log('Error in creating user account' + JSON.stringify(error));
       });
 
     }else {
@@ -60,7 +60,6 @@ export class SignupComponent implements OnInit {
   }
 
   public isDirtyComponent(): boolean {
-  
     if(this.signupForm.dirty){
       return false;
     }

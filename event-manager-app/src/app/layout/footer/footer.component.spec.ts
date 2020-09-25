@@ -1,25 +1,29 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { FooterComponent } from './footer.component';
 
-describe('FooterComponent', () => {
-  let component: FooterComponent;
-  let fixture: ComponentFixture<FooterComponent>;
+describe('Footer Component testing.', () => {
+    let component: FooterComponent;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ FooterComponent ]
-    })
-    .compileComponents();
-  }));
+    beforeEach(() => {
+        component = new FooterComponent();
+    });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(FooterComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    afterEach(() => {
+        component = null;
+    });
+
+    it('should instantiate the footer', () => {
+        expect(component).toBeDefined();
+    });
+
+    it('should validate properties.', () => {
+        expect(component.year).toBeDefined();
+        expect(component.year).toEqual(2020);
+
+        component.year = 2000;
+        expect(component.year).toEqual(2000);
+
+        component.year = null;
+        expect(component.year).toBeNull();
+    });
 });

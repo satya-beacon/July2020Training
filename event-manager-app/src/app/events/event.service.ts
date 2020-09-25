@@ -9,7 +9,7 @@ export class EventService {
     private data: EventModel[];
 
     constructor(){
-        if(localStorage.getItem('events') != null && localStorage.getItem('events') != undefined){
+        if(localStorage.getItem('events') !== null && localStorage.getItem('events') !== undefined){
             this.data = JSON.parse(localStorage.getItem('events'));
         }else{
             this.data = EVENTS;

@@ -13,7 +13,6 @@ export class WelcomeComponent implements OnInit {
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-   
     this.route.data.subscribe((response) => {
      this.loggedUser = response.loggedUser;
     });

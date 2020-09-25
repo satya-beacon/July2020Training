@@ -16,7 +16,7 @@ export class AuthInterceptor implements HttpInterceptor {
       token = sessionStorage.getItem('token');
     }
 
-    let headers = new HttpHeaders({
+    const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
   });
